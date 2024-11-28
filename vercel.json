@@ -1,12 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "https://ultra.api.eosnation.io/:path*"
-    },
-    {
-      "source": "/kucoin/:path*",
-      "destination": "https://api.kucoin.com/:path*"
+      "source": "/api/v1/market/:path*",
+      "destination": "https://api.kucoin.com/api/v1/market/:path*"
     }
   ],
   "headers": [
@@ -19,11 +15,11 @@
         },
         {
           "key": "Access-Control-Allow-Methods",
-          "value": "GET,POST,OPTIONS"
+          "value": "GET,POST,PUT,DELETE,OPTIONS"
         },
         {
           "key": "Access-Control-Allow-Headers",
-          "value": "Content-Type"
+          "value": "X-Requested-With, Content-Type, Accept"
         }
       ]
     }

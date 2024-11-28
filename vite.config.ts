@@ -8,24 +8,24 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/api': {
-        target: 'https://ultra.api.eosnation.io',
+      '/api/v1/market': {
+        target: 'https://api.kucoin.com',
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ''),
-        secure: false,
+        secure: true,
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
-      },
-      '/kucoin': {
-        target: 'https://api.kucoin.com',
-        changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/kucoin/, ''),
-        secure: false,
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
+        configure: (proxy, _options) => {
+          proxy.on('error', (err, _req, _res) => {
+            console.log('proxy error', err);
+          });
+          proxy.on('proxyReq', (req, _res) => {
+            console.log('Sending Request to the Target:', req.method, req.path);
+          });
+          proxy.on('proxyRes', (proxyRes, req, _res) => {
+            console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
+          });
         },
       },
     },

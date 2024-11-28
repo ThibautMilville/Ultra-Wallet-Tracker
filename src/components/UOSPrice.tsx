@@ -46,16 +46,16 @@ export function UOSPrice() {
             </div>
             
             <div className="grid grid-cols-3 gap-4">
-              <div className="bg-[#2A2F3F]/30 rounded-xl p-4">
+              <div className="bg-[#2A2F3F]/30 rounded-xl p-4 flex flex-col items-center justify-center">
                 <p className="text-gray-400 text-sm mb-2">1h Change</p>
                 <PriceChange value={data?.change1h ?? 0} className="text-lg font-semibold" />
               </div>
-              <div className="bg-[#2A2F3F]/30 rounded-xl p-4">
+              <div className="bg-[#2A2F3F]/30 rounded-xl p-4 flex flex-col items-center justify-center">
                 <p className="text-gray-400 text-sm mb-2">24h Change</p>
                 <PriceChange value={data?.change24h ?? 0} className="text-lg font-semibold" />
               </div>
-              <div className="bg-[#2A2F3F]/30 rounded-xl p-4">
-                <p className="text-gray-400 text-sm mb-2">24h Volume (Kucoin)</p>
+              <div className="bg-[#2A2F3F]/30 rounded-xl p-4 flex flex-col items-center justify-center">
+                <p className="text-gray-400 text-sm mb-2">24h Volume</p>
                 <p className="text-white text-lg font-semibold">
                   ${(data?.volume24h ?? 0).toLocaleString(undefined, { maximumFractionDigits: 0 })}
                 </p>
