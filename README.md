@@ -2,8 +2,6 @@
 
 A real-time dashboard application that tracks the total number of Ultra wallets. Built with React, TypeScript, and Tailwind CSS.
 
-![Ultra Wallet Tracker](https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=2232&ixlib=rb-4.0.3)
-
 ## Features
 
 - 📊 Real-time wallet count tracking
