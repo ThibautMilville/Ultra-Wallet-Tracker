@@ -10,10 +10,10 @@ export function useWalletStats() {
       return { totalWallets: wallets.length };
     },
     {
-      refetchInterval: REFRESH_INTERVAL,
+      refetchInterval: REFRESH_INTERVAL.WALLET,
       retry: 3,
       retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
-      staleTime: REFRESH_INTERVAL - 5000,
+      staleTime: REFRESH_INTERVAL.WALLET - 5000,
       onError: (error) => {
         console.error('Query error:', error instanceof Error ? error.message : 'Unknown error');
       }

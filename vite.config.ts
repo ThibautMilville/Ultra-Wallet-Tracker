@@ -18,6 +18,16 @@ export default defineConfig({
           'Content-Type': 'application/json',
         },
       },
+      '/kucoin': {
+        target: 'https://api.kucoin.com',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/kucoin/, ''),
+        secure: false,
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+      },
     },
   },
 });

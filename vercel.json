@@ -3,6 +3,10 @@
     {
       "source": "/api/:path*",
       "destination": "https://ultra.api.eosnation.io/:path*"
+    },
+    {
+      "source": "/kucoin/:path*",
+      "destination": "https://api.kucoin.com/:path*"
     }
   ],
   "headers": [

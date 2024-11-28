@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { TableScopeResponse } from '../types/api';
-import { API_BASE_URL, MAX_RETRIES, RETRY_DELAY } from '../config/constants';
-
-const API_ENDPOINT = `${API_BASE_URL}/v1/chain/get_table_by_scope`;
+import { API_ENDPOINTS, MAX_RETRIES, RETRY_DELAY } from '../config/constants';
 
 export async function fetchAllWallets(): Promise<string[]> {
   let allRows: string[] = [];
@@ -18,11 +16,14 @@ export async function fetchAllWallets(): Promise<string[]> {
 
   while (hasMore && retryCount < MAX_RETRIES) {
     try {
-      const response: { data: TableScopeResponse } = await instance.post<TableScopeResponse>(API_ENDPOINT, {
-        code: "eosio.token",
-        limit: 100000,
-        ...(lowerBound ? { lower_bound: lowerBound } : {})
-      });
+      const response: { data: TableScopeResponse } = await instance.post<TableScopeResponse>(
+        API_ENDPOINTS.ULTRA.GET_TABLE_SCOPE,
+        {
+          code: "eosio.token",
+          limit: 100000,
+          ...(lowerBound ? { lower_bound: lowerBound } : {})
+        }
+      );
 
       const data = response.data;
       
@@ -50,7 +51,6 @@ export async function fetchAllWallets(): Promise<string[]> {
           throw new Error('An unexpected error occurred');
         }
       }
-      // Wait before retrying with exponential backoff
       await new Promise(resolve => setTimeout(resolve, RETRY_DELAY * Math.pow(2, retryCount - 1)));
     }
   }
