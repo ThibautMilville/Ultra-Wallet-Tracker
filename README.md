@@ -55,7 +55,6 @@ src/
 ├── api/
 │   └── ultraApi.ts       # API integration layer
 ├── components/
-│   ├── StatCard.tsx      # Reusable statistics card component
 │   └── WalletDashboard.tsx # Main dashboard component
 ├── hooks/
 │   └── useWalletStats.ts # Custom hook for wallet statistics
