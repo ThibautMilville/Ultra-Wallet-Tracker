@@ -5,8 +5,7 @@ A real-time dashboard application that tracks the total number of Ultra wallets.
 ## Features
 
 - 📊 Real-time wallet count tracking
-- 📈 24-hour change statistics
-- 🔄 Automatic data refresh (every 5 minutes)
+- 🔄 Automatic data refresh (every 30 seconds)
 - 📱 Responsive design
 - ⚡ Fast and efficient data fetching with React Query
 - 🎨 Modern UI with Tailwind CSS
