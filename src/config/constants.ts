@@ -3,8 +3,8 @@ export const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 // API Configuration
 export const REFRESH_INTERVAL = {
-  WALLET: 30000, // 30 seconds
-  PRICE: 10000,  // 10 seconds
+  WALLET: 15000, // 15 seconds
+  PRICE: 1000,  // 1 second
 } as const;
 
 export const MAX_RETRIES = 3;

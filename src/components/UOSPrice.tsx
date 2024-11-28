@@ -3,6 +3,7 @@ import { LoadingSpinner } from './LoadingSpinner';
 import { PriceChange } from './PriceChange';
 import { LiveIndicator } from './LiveIndicator';
 import { AlertCircle, TrendingUp } from 'lucide-react';
+import { formatLargeNumber } from '../utils/marketCalculations';
 
 export function UOSPrice() {
   const { data, isLoading, error } = useUOSPrice();
@@ -47,8 +48,10 @@ export function UOSPrice() {
             
             <div className="grid grid-cols-3 gap-4">
               <div className="bg-[#2A2F3F]/30 rounded-xl p-4 flex flex-col items-center justify-center min-h-[100px]">
-                <p className="text-gray-400 text-sm mb-2 text-center">1h Change</p>
-                <PriceChange value={data?.change1h ?? 0} className="text-lg font-semibold" />
+                <p className="text-gray-400 text-sm mb-2 text-center">Market Cap</p>
+                <p className="text-white text-lg font-semibold">
+                  {formatLargeNumber(data?.marketCap ?? 0)}
+                </p>
               </div>
               <div className="bg-[#2A2F3F]/30 rounded-xl p-4 flex flex-col items-center justify-center min-h-[100px]">
                 <p className="text-gray-400 text-sm mb-2 text-center">24h Change</p>

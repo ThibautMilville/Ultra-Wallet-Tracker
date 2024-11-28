@@ -12,7 +12,7 @@ export interface WalletStats {
 
 export interface UOSPriceStats {
   price: number;
-  change1h: number;
+  marketCap: number;
   change24h: number;
   volume24h: number;
 }
