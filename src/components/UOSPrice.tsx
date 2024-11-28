@@ -41,21 +41,21 @@ export function UOSPrice() {
           <div className="space-y-6">
             <div className="text-center">
               <div className="text-4xl font-bold text-white">
-                ${data?.price.toFixed(4)}
+                ${data?.price.toFixed(5)}
               </div>
             </div>
             
             <div className="grid grid-cols-3 gap-4">
-              <div className="bg-[#2A2F3F]/30 rounded-xl p-4 flex flex-col items-center justify-center">
-                <p className="text-gray-400 text-sm mb-2">1h Change</p>
+              <div className="bg-[#2A2F3F]/30 rounded-xl p-4 flex flex-col items-center justify-center min-h-[100px]">
+                <p className="text-gray-400 text-sm mb-2 text-center">1h Change</p>
                 <PriceChange value={data?.change1h ?? 0} className="text-lg font-semibold" />
               </div>
-              <div className="bg-[#2A2F3F]/30 rounded-xl p-4 flex flex-col items-center justify-center">
-                <p className="text-gray-400 text-sm mb-2">24h Change</p>
+              <div className="bg-[#2A2F3F]/30 rounded-xl p-4 flex flex-col items-center justify-center min-h-[100px]">
+                <p className="text-gray-400 text-sm mb-2 text-center">24h Change</p>
                 <PriceChange value={data?.change24h ?? 0} className="text-lg font-semibold" />
               </div>
-              <div className="bg-[#2A2F3F]/30 rounded-xl p-4 flex flex-col items-center justify-center">
-                <p className="text-gray-400 text-sm mb-2">24h Volume</p>
+              <div className="bg-[#2A2F3F]/30 rounded-xl p-4 flex flex-col items-center justify-center min-h-[100px]">
+                <p className="text-gray-400 text-sm mb-2 text-center">24h Volume<br/>(KuCoin)</p>
                 <p className="text-white text-lg font-semibold">
                   ${(data?.volume24h ?? 0).toLocaleString(undefined, { maximumFractionDigits: 0 })}
                 </p>

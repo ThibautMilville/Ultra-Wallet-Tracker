@@ -34,3 +34,16 @@ export interface KuCoinTickerResponse {
     lastDayLow: string;
   };
 }
+
+export interface Trade {
+  sequence: string;
+  price: string;
+  size: string;
+  side: string;
+  time: number;
+}
+
+export interface TradeHistoryResponse {
+  code: string;
+  data: Trade[];
+}
