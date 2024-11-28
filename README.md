@@ -2,13 +2,10 @@
 
 A real-time dashboard application that tracks the total number of Ultra wallets. Built with React, TypeScript, and Tailwind CSS.
 
-![Ultra Wallet Tracker](https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=2232&ixlib=rb-4.0.3)
-
 ## Features
 
 - 📊 Real-time wallet count tracking
-- 📈 24-hour change statistics
-- 🔄 Automatic data refresh (every 5 minutes)
+- 🔄 Automatic data refresh (every 30 seconds)
 - 📱 Responsive design
 - ⚡ Fast and efficient data fetching with React Query
 - 🎨 Modern UI with Tailwind CSS
@@ -58,7 +55,6 @@ src/
 ├── api/
 │   └── ultraApi.ts       # API integration layer
 ├── components/
-│   ├── StatCard.tsx      # Reusable statistics card component
 │   └── WalletDashboard.tsx # Main dashboard component
 ├── hooks/
 │   └── useWalletStats.ts # Custom hook for wallet statistics
