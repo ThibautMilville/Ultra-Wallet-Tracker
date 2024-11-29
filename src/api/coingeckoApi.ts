@@ -7,7 +7,7 @@ const createAxiosInstance = (): AxiosInstance => {
     baseURL: '/api-coingecko',
     headers: {
       'Content-Type': 'application/json',
-      'x-cg-demo-api-key': import.meta.env.VITE_COINGECKO_API_KEY,
+      'x-cg-demo-api-key': import.meta.env.VITE_COINGECKO_API_KEY || import.meta.env.COINGECKO_API_KEY,
     },
     timeout: 10000,
   });
@@ -36,7 +36,15 @@ async function fetchWithRetry<T>(
 
 export async function fetchUOSMetrics() {
   const response = await fetchWithRetry(() =>
-    instance.get<CoinGeckoResponse>('?ids=ultra&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true')
+    instance.get<CoinGeckoResponse>('', {
+      params: {
+        ids: 'ultra',
+        vs_currencies: 'usd',
+        include_market_cap: true,
+        include_24hr_vol: true,
+        include_24hr_change: true
+      }
+    })
   );
 
   if (!response.data?.ultra) {
