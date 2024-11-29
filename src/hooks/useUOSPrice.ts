@@ -32,9 +32,9 @@ export function useUOSPrice() {
 
   const data: UOSPriceStats | undefined = priceQuery.data && metricsQuery.data
     ? {
-        price: priceQuery.data,
+        price: priceQuery.data.price,
         marketCap: metricsQuery.data.marketCap,
-        change24h: metricsQuery.data.change24h,
+        change24h: priceQuery.data.change24h,
         volume24h: metricsQuery.data.volume24h,
       }
     : undefined;

@@ -21,6 +21,7 @@ export default defineConfig({
         target: "https://api.coingecko.com/api/v3/simple/price",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api-coingecko/, ''),
+        secure: true,
         configure: (proxy) => {
           proxy.on('proxyReq', (proxyReq) => {
             const apiKey = process.env.VITE_COINGECKO_API_KEY || process.env.COINGECKO_API_KEY;
@@ -43,5 +44,5 @@ export default defineConfig({
       },
     },
   },
-  envPrefix: ['VITE_', 'COINGECKO_'],
+  envPrefix: ['VITE_'],
 });

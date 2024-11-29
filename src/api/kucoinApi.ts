@@ -33,7 +33,7 @@ async function fetchWithRetry<T>(
   throw lastError || new Error('Request failed after maximum retries');
 }
 
-export async function fetchUOSPrice(): Promise<number> {
+export async function fetchUOSPrice(): Promise<{ price: number; change24h: number }> {
   const response = await fetchWithRetry(() =>
     instance.get<KuCoinTickerResponse>(`${API_ENDPOINTS.KUCOIN.MARKET_STATS}?symbol=UOS-USDT`)
   );
@@ -42,5 +42,8 @@ export async function fetchUOSPrice(): Promise<number> {
     throw new Error('Invalid API response format');
   }
 
-  return parseFloat(response.data.data.last);
+  return {
+    price: parseFloat(response.data.data.last),
+    change24h: parseFloat(response.data.data.changeRate) * 100
+  };
 }
