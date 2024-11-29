@@ -1,15 +1,34 @@
 # Ultra Wallet Tracker
 
-A real-time dashboard application that tracks the total number of Ultra wallets. Built with React, TypeScript, and Tailwind CSS.
+A real-time dashboard application that tracks the total number of Ultra wallets, designed specifically for live streaming on X (formerly Twitter). Built with React, TypeScript, and Tailwind CSS.
+
+## Purpose
+
+This dashboard was created to provide real-time Ultra wallet statistics during live X broadcasts. It features:
+
+- Clean, minimalist design optimized for streaming overlays
+- High-contrast visuals for better readability during broadcasts
+- Smooth animations that look great on stream
+- Auto-refreshing data that keeps your audience engaged
 
 ## Features
 
 - 📊 Real-time wallet count tracking
-- 🔄 Automatic data refresh (every 30 seconds)
-- 📱 Responsive design
+- 🔄 Automatic data refresh
+  - Wallet count: Every 5 minutes
+  - UOS price: Every second
+  - Market metrics: Every 30 minutes
+- 📱 Stream-optimized responsive design
 - ⚡ Fast and efficient data fetching with React Query
 - 🎨 Modern UI with Tailwind CSS
 - 💪 Type-safe with TypeScript
+
+## Streaming Setup
+
+1. Add as Browser Source in your streaming software (OBS, Streamlabs, etc.)
+2. Recommended dimensions: 1920x1080 (16:9)
+3. Set background color to: #13151D
+4. Enable "Refresh browser when scene becomes active"
 
 ## Tech Stack
 
@@ -41,7 +60,12 @@ cd ultra-wallet-tracker
 npm install
 ```
 
-3. Start the development server:
+3. Create a `.env` file based on `.env.example` and add your CoinGecko API key:
+```
+VITE_COINGECKO_API_KEY=your-api-key-here
+```
+
+4. Start the development server:
 ```bash
 npm run dev
 ```
@@ -53,25 +77,32 @@ The application will be available at `http://localhost:5173`
 ```
 src/
 ├── api/
-│   └── ultraApi.ts       # API integration layer
+│   ├── ultraApi.ts       # Ultra blockchain API integration
+│   ├── kucoinApi.ts      # KuCoin market data API
+│   └── coingeckoApi.ts   # CoinGecko metrics API
 ├── components/
-│   └── WalletDashboard.tsx # Main dashboard component
+│   ├── WalletCounter.tsx # Wallet statistics component
+│   ├── UOSPrice.tsx      # Price tracking component
+│   ├── LiveIndicator.tsx # Live status indicator
+│   ├── LoadingSpinner.tsx# Loading animation
+│   └── PriceChange.tsx   # Price change display
 ├── hooks/
-│   └── useWalletStats.ts # Custom hook for wallet statistics
+│   ├── useWalletStats.ts # Wallet data management
+│   └── useUOSPrice.ts    # Price data management
 ├── types/
 │   └── api.ts           # TypeScript interfaces
+├── utils/
+│   └── marketCalculations.ts # Market data utilities
 ├── App.tsx              # Root component
 └── main.tsx            # Application entry point
 ```
 
 ## API Integration
 
-The application integrates with the Ultra API endpoint:
-```
-http://ultra.api.eosnation.io/v1/chain/get_table_by_scope
-```
-
-The API implementation handles pagination using the EOSIO `more` field for complete data retrieval.
+The application integrates with multiple APIs:
+- Ultra Blockchain API (via EOS Nation)
+- KuCoin API for real-time price data
+- CoinGecko API for market metrics
 
 ## Available Scripts
 
@@ -98,6 +129,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [EOS Nation](https://eosnation.io) for maintaining the API endpoint
 - [Tailwind CSS](https://tailwindcss.com) for the utility-first CSS framework
 - [React Query](https://tanstack.com/query) for efficient data fetching
+- [X](https://x.com) platform for inspiring this streaming-focused dashboard
 
 ## Contact
 
