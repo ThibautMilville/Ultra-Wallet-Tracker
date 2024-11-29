@@ -6,7 +6,7 @@
     },
     {
       "source": "/api-coingecko/:path*",
-      "destination": "https://api.coingecko.com/api/v3/:path*"
+      "destination": "https://api.coingecko.com/api/v3/simple/price/:path*"
     }
   ],
   "headers": [
@@ -23,7 +23,7 @@
         },
         {
           "key": "Access-Control-Allow-Headers",
-          "value": "X-Requested-With, Content-Type, Accept, x-cg-pro-api-key"
+          "value": "X-Requested-With, Content-Type, Accept, x-cg-demo-api-key"
         }
       ]
     }

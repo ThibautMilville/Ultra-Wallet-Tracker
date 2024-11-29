@@ -1,12 +1,13 @@
 import axios, { AxiosInstance } from 'axios';
 import { CoinGeckoResponse } from '../types/api';
-import { API_ENDPOINTS, MAX_RETRIES, RETRY_DELAY } from '../config/constants';
+import { MAX_RETRIES, RETRY_DELAY } from '../config/constants';
 
 const createAxiosInstance = (): AxiosInstance => {
   return axios.create({
+    baseURL: '/api-coingecko',
     headers: {
       'Content-Type': 'application/json',
-      'x-cg-pro-api-key': API_ENDPOINTS.COINGECKO.API_KEY,
+      'x-cg-demo-api-key': import.meta.env.VITE_COINGECKO_API_KEY,
     },
     timeout: 10000,
   });
@@ -35,7 +36,7 @@ async function fetchWithRetry<T>(
 
 export async function fetchUOSMetrics() {
   const response = await fetchWithRetry(() =>
-    instance.get<CoinGeckoResponse>(`api-coingecko?ids=ultra&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true`)
+    instance.get<CoinGeckoResponse>('?ids=ultra&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true')
   );
 
   if (!response.data?.ultra) {

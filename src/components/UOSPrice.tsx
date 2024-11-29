@@ -58,9 +58,9 @@ export function UOSPrice() {
                 <PriceChange value={data?.change24h ?? 0} className="text-lg font-semibold" />
               </div>
               <div className="bg-[#2A2F3F]/30 rounded-xl p-4 flex flex-col items-center justify-center min-h-[100px]">
-                <p className="text-gray-400 text-sm mb-2 text-center">24h Volume<br/>(KuCoin)</p>
+                <p className="text-gray-400 text-sm mb-2 text-center">24h Volume<br/>(Total)</p>
                 <p className="text-white text-lg font-semibold">
-                  ${(data?.volume24h ?? 0).toLocaleString(undefined, { maximumFractionDigits: 0 })}
+                  {formatLargeNumber(data?.volume24h ?? 0)}
                 </p>
               </div>
             </div>

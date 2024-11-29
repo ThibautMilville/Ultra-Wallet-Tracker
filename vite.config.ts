@@ -23,10 +23,7 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api-coingecko/, ''),
         configure: (proxy) => {
           proxy.on('proxyReq', (proxyReq) => {
-            const token = process.env.VITE_COINGECKO_API_KEY || import.meta.env.VITE_COINGECKO_API_KEY;
-            if (token) {
-              proxyReq.setHeader('x-cg-demo-api-key', token);
-            }
+            proxyReq.setHeader('x-cg-demo-api-key', process.env.VITE_COINGECKO_API_KEY || import.meta.env.VITE_COINGECKO_API_KEY);
           });
         },
       },
