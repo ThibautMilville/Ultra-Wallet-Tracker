@@ -3,8 +3,9 @@ export const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 
 // API Configuration
 export const REFRESH_INTERVAL = {
-  WALLET: 15000, // 15 seconds
-  PRICE: 1000,  // 1 second
+  WALLET: 300000, // 5 minutes
+  PRICE: 1000,   // 1 second for KuCoin price
+  METRICS: 2400000 // 30 minutes for CoinGecko metrics
 } as const;
 
 export const MAX_RETRIES = 3;
@@ -17,6 +18,9 @@ export const API_ENDPOINTS = {
   },
   KUCOIN: {
     MARKET_STATS: '/api/v1/market/stats',
-    TICKER_24H: '/api/v1/market/histories',
+  },
+  COINGECKO: {
+    BASE_URL: import.meta.env.VITE_COINGECKO_API_URL,
+    API_KEY: import.meta.env.VITE_COINGECKO_API_KEY,
   },
 } as const;

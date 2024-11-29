@@ -35,15 +35,10 @@ export interface KuCoinTickerResponse {
   };
 }
 
-export interface Trade {
-  sequence: string;
-  price: string;
-  size: string;
-  side: string;
-  time: number;
-}
-
-export interface TradeHistoryResponse {
-  code: string;
-  data: Trade[];
+export interface CoinGeckoResponse {
+  ultra: {
+    usd_market_cap: number;
+    usd_24h_vol: number;
+    usd_24h_change: number;
+  };
 }

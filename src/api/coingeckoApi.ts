@@ -1,12 +1,12 @@
 import axios, { AxiosInstance } from 'axios';
-import { KuCoinTickerResponse } from '../types/api';
+import { CoinGeckoResponse } from '../types/api';
 import { API_ENDPOINTS, MAX_RETRIES, RETRY_DELAY } from '../config/constants';
 
 const createAxiosInstance = (): AxiosInstance => {
   return axios.create({
     headers: {
       'Content-Type': 'application/json',
-      'Accept': 'application/json',
+      'x-cg-pro-api-key': API_ENDPOINTS.COINGECKO.API_KEY,
     },
     timeout: 10000,
   });
@@ -33,14 +33,20 @@ async function fetchWithRetry<T>(
   throw lastError || new Error('Request failed after maximum retries');
 }
 
-export async function fetchUOSPrice(): Promise<number> {
+export async function fetchUOSMetrics() {
   const response = await fetchWithRetry(() =>
-    instance.get<KuCoinTickerResponse>(`${API_ENDPOINTS.KUCOIN.MARKET_STATS}?symbol=UOS-USDT`)
+    instance.get<CoinGeckoResponse>(`api-coingecko?ids=ultra&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true`)
   );
 
-  if (!response.data?.data) {
+  if (!response.data?.ultra) {
     throw new Error('Invalid API response format');
   }
 
-  return parseFloat(response.data.data.last);
+  const data = response.data.ultra;
+  
+  return {
+    marketCap: data.usd_market_cap,
+    change24h: data.usd_24h_change,
+    volume24h: data.usd_24h_vol,
+  };
 }

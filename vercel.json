@@ -3,6 +3,10 @@
     {
       "source": "/api/v1/market/:path*",
       "destination": "https://api.kucoin.com/api/v1/market/:path*"
+    },
+    {
+      "source": "/api-coingecko/:path*",
+      "destination": "https://api.coingecko.com/api/v3/:path*"
     }
   ],
   "headers": [
@@ -15,11 +19,11 @@
         },
         {
           "key": "Access-Control-Allow-Methods",
-          "value": "GET,POST,PUT,DELETE,OPTIONS"
+          "value": "GET,OPTIONS"
         },
         {
           "key": "Access-Control-Allow-Headers",
-          "value": "X-Requested-With, Content-Type, Accept"
+          "value": "X-Requested-With, Content-Type, Accept, x-cg-pro-api-key"
         }
       ]
     }

@@ -1,11 +1,11 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export default defineConfig({
   plugins: [react()],
-  optimizeDeps: {
-    exclude: ['lucide-react'],
-  },
   server: {
     proxy: {
       '/api/v1/market': {
@@ -16,18 +16,32 @@ export default defineConfig({
           'Accept': 'application/json',
           'Content-Type': 'application/json',
         },
-        configure: (proxy, _options) => {
-          proxy.on('error', (err, _req, _res) => {
-            console.log('proxy error', err);
-          });
-          proxy.on('proxyReq', (req, _res) => {
-            console.log('Sending Request to the Target:', req.method, req.path);
-          });
-          proxy.on('proxyRes', (proxyRes, req, _res) => {
-            console.log('Received Response from the Target:', proxyRes.statusCode, req.url);
+      },
+      "/api-coingecko": {
+        target: "https://api.coingecko.com/api/v3/simple/price",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api-coingecko/, ''),
+        configure: (proxy) => {
+          proxy.on('proxyReq', (proxyReq) => {
+            const token = process.env.VITE_COINGECKO_API_KEY || import.meta.env.VITE_COINGECKO_API_KEY;
+            if (token) {
+              proxyReq.setHeader('x-cg-demo-api-key', token);
+            }
           });
         },
       },
     },
   },
+  build: {
+    outDir: 'dist',
+    sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom', 'lucide-react'],
+        },
+      },
+    },
+  },
+  envPrefix: 'VITE_',
 });
