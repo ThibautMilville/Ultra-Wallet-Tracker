@@ -3,16 +3,11 @@ import { CoinGeckoResponse } from '../types/api';
 import { MAX_RETRIES, RETRY_DELAY } from '../config/constants';
 
 const createAxiosInstance = (): AxiosInstance => {
-  const apiKey = import.meta.env.VITE_COINGECKO_API_KEY;
-  if (!apiKey) {
-    console.warn('CoinGecko API key is not set. Some features may not work correctly.');
-  }
-
   return axios.create({
     baseURL: '/api-coingecko',
     headers: {
       'Content-Type': 'application/json',
-      ...(apiKey && { 'x-cg-demo-api-key': `CG-${apiKey}` }),
+      'x-cg-demo-api-key': import.meta.env.VITE_COINGECKO_API_KEY || import.meta.env.COINGECKO_API_KEY,
     },
     timeout: 10000,
   });
