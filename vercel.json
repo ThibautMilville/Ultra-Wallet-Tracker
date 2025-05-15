@@ -3,10 +3,6 @@
     {
       "source": "/api/v1/market/:path*",
       "destination": "https://api.kucoin.com/api/v1/market/:path*"
-    },
-    {
-      "source": "/api-coingecko",
-      "destination": "https://api.coingecko.com/api/v3/simple/price"
     }
   ],
   "headers": [
@@ -26,27 +22,9 @@
           "value": "X-Requested-With, Content-Type, Accept, x-cg-demo-api-key, Authorization"
         }
       ]
-    },
-    {
-      "source": "/api-coingecko",
-      "headers": [
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        },
-        {
-          "key": "Access-Control-Allow-Methods",
-          "value": "GET,OPTIONS"
-        },
-        {
-          "key": "Access-Control-Allow-Headers",
-          "value": "X-Requested-With, Content-Type, Accept, x-cg-demo-api-key, Authorization"
-        },
-        {
-          "key": "x-cg-demo-api-key",
-          "value": "CG-qsz13orbd7MXJ5w6pDK668qt"
-        }
-      ]
     }
-  ]
+  ],
+  "env": {
+    "VITE_COINGECKO_API_KEY": "CG-qsz13orbd7MXJ5w6pDK668qt"
+  }
 }
