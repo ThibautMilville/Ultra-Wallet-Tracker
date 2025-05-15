@@ -26,6 +26,15 @@
           "value": "X-Requested-With, Content-Type, Accept, x-cg-demo-api-key"
         }
       ]
+    },
+    {
+      "source": "/api-coingecko",
+      "headers": [
+        {
+          "key": "x-cg-demo-api-key",
+          "value": "CG-${VITE_COINGECKO_API_KEY}"
+        }
+      ]
     }
   ]
 }
