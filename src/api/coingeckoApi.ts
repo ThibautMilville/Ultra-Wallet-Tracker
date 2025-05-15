@@ -4,8 +4,9 @@ import { MAX_RETRIES, RETRY_DELAY, RATE_LIMIT_DELAY } from '../config/constants'
 
 const createAxiosInstance = (): AxiosInstance => {
   const instance = axios.create({
-    baseURL: '/api-coingecko',
+    baseURL: 'https://api.coingecko.com/api/v3/simple/price',
     headers: {
+      'Accept': 'application/json',
       'Content-Type': 'application/json',
       'x-cg-demo-api-key': import.meta.env.VITE_COINGECKO_API_KEY || import.meta.env.COINGECKO_API_KEY,
     },
@@ -19,7 +20,9 @@ const createAxiosInstance = (): AxiosInstance => {
         url: config.url,
         method: config.method,
         headers: config.headers,
-        params: config.params
+        params: config.params,
+        baseURL: config.baseURL,
+        fullUrl: `${config.baseURL}${config.url}`
       });
       return config;
     },
@@ -36,7 +39,13 @@ const createAxiosInstance = (): AxiosInstance => {
         status: response.status,
         statusText: response.statusText,
         headers: response.headers,
-        data: response.data
+        data: response.data,
+        config: {
+          url: response.config.url,
+          method: response.config.method,
+          baseURL: response.config.baseURL,
+          headers: response.config.headers
+        }
       });
       return response;
     },
@@ -46,7 +55,13 @@ const createAxiosInstance = (): AxiosInstance => {
         statusText: error.response?.statusText,
         headers: error.response?.headers,
         data: error.response?.data,
-        error: error.message
+        error: error.message,
+        config: error.config ? {
+          url: error.config.url,
+          method: error.config.method,
+          baseURL: error.config.baseURL,
+          headers: error.config.headers
+        } : 'No config available'
       });
       return Promise.reject(error);
     }
@@ -118,6 +133,11 @@ export async function fetchUOSMetrics() {
         include_market_cap: true,
         include_24hr_vol: true,
         include_24hr_change: true
+      },
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'x-cg-demo-api-key': import.meta.env.VITE_COINGECKO_API_KEY || import.meta.env.COINGECKO_API_KEY
       }
     })
   );
