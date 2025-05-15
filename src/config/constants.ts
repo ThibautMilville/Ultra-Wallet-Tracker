@@ -10,6 +10,7 @@ export const REFRESH_INTERVAL = {
 
 export const MAX_RETRIES = 3;
 export const RETRY_DELAY = 1000;
+export const RATE_LIMIT_DELAY = 120000;
 
 // API Endpoints
 export const API_ENDPOINTS = {
