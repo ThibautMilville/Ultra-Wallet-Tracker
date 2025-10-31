@@ -107,7 +107,7 @@ export function CurrencyConverter() {
                   value={usdAmount}
                   onChange={(e) => handleUsdChange(e.target.value)}
                   placeholder="0.00"
-                  className="w-full bg-[#1B1F2B]/50 border border-[#2A2F3F]/50 rounded-lg px-4 py-3 text-white text-2xl font-semibold focus:outline-none focus:border-[#8C5AE8]/50 focus:ring-2 focus:ring-[#8C5AE8]/20 transition-all"
+                  className="w-full bg-[#1B1F2B]/50 border border-[#2A2F3F]/50 rounded-lg px-4 py-3 text-white text-2xl font-semibold outline-none focus:outline-none focus:border-[#8C5AE8]/50 focus:ring-2 focus:ring-[#8C5AE8]/20 transition-all"
                 />
                 <div className="mt-2 text-sm text-gray-500">
                   1 UOS = ${uosPriceUSD.toFixed(5)}
@@ -126,7 +126,7 @@ export function CurrencyConverter() {
                   value={eurAmount}
                   onChange={(e) => handleEurChange(e.target.value)}
                   placeholder="0.00"
-                  className="w-full bg-[#1B1F2B]/50 border border-[#2A2F3F]/50 rounded-lg px-4 py-3 text-white text-2xl font-semibold focus:outline-none focus:border-[#8C5AE8]/50 focus:ring-2 focus:ring-[#8C5AE8]/20 transition-all"
+                  className="w-full bg-[#1B1F2B]/50 border border-[#2A2F3F]/50 rounded-lg px-4 py-3 text-white text-2xl font-semibold outline-none focus:outline-none focus:border-[#8C5AE8]/50 focus:ring-2 focus:ring-[#8C5AE8]/20 transition-all"
                 />
                 <div className="mt-2 text-sm text-gray-500">
                   1 UOS = €{uosPriceEUR.toFixed(5)} (1 EUR = ${(1 / eurToUsd).toFixed(4)})
