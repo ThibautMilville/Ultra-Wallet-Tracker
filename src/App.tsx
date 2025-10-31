@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { WalletCounter } from './components/WalletCounter';
 import { UOSPrice } from './components/UOSPrice';
+import { CurrencyConverter } from './components/CurrencyConverter';
 import BackgroundEffect from './components/BackgroundEffect';
 
 const queryClient = new QueryClient();
@@ -10,9 +11,16 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BackgroundEffect />
       <div className="min-h-screen flex flex-col items-center justify-between p-4">
-        <div className="w-full flex-1 flex flex-col items-center justify-center gap-6 my-4">
-          <WalletCounter />
-          <UOSPrice />
+        <div className="w-full flex-1 flex items-center justify-center gap-6 my-4">
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-6 w-full max-w-6xl">
+            <div className="flex flex-col items-center gap-6 w-full lg:w-auto">
+              <WalletCounter />
+              <UOSPrice />
+            </div>
+            <div className="w-full lg:w-auto">
+              <CurrencyConverter />
+            </div>
+          </div>
         </div>
         
         <footer className="w-full flex justify-center py-4">
