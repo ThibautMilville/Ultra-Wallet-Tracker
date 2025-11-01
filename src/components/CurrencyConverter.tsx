@@ -93,7 +93,7 @@ export function CurrencyConverter() {
       <div className="bg-gradient-to-br from-[#1B1F2B] to-[#1B1F2B]/95 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-[#2A2F3F]/50 max-w-lg w-full relative overflow-hidden">
         <div className="flex flex-col items-center justify-center gap-4 text-red-500">
           <AlertCircle size={24} />
-          <p className="text-lg">Impossible de charger les données</p>
+          <p className="text-lg">Failed to load data</p>
         </div>
       </div>
     );
@@ -107,7 +107,7 @@ export function CurrencyConverter() {
       <div className="relative">
         <div className="flex items-center gap-2 text-[#8C5AE8] mb-8">
           <ArrowUpDown size={20} className="opacity-80" />
-          <h2 className="font-semibold tracking-wide">CONVERTISSEUR UOS</h2>
+          <h2 className="font-semibold tracking-wide">UOS CONVERTER</h2>
         </div>
         
         {isLoading ? (
@@ -119,7 +119,7 @@ export function CurrencyConverter() {
             <div className="bg-[#2A2F3F]/30 rounded-xl p-6">
               <label className="flex items-center gap-2 text-gray-400 text-sm mb-3">
                 <DollarSign size={16} />
-                Montant en USD
+                Amount in USD
               </label>
               <div className="relative">
                 <input
@@ -138,7 +138,7 @@ export function CurrencyConverter() {
             <div className="bg-[#2A2F3F]/30 rounded-xl p-6">
               <label className="flex items-center gap-2 text-gray-400 text-sm mb-3">
                 <Euro size={16} />
-                Montant en EUR
+                Amount in EUR
               </label>
               <div className="relative">
                 <input
@@ -157,7 +157,7 @@ export function CurrencyConverter() {
             <div className="bg-[#2A2F3F]/30 rounded-xl p-6">
               <label className="flex items-center gap-2 text-gray-400 text-sm mb-3">
                 <Coins size={16} />
-                Quantité en UOS
+                Quantity in UOS
               </label>
               <div className="relative">
                 <input
@@ -168,7 +168,7 @@ export function CurrencyConverter() {
                   className="w-full bg-[#1B1F2B]/50 border border-[#2A2F3F]/50 rounded-lg px-4 py-3 text-white text-2xl font-semibold outline-none focus:outline-none focus:border-[#8C5AE8]/50 focus:ring-2 focus:ring-[#8C5AE8]/20 transition-all"
                 />
                 <div className="mt-2 text-sm text-gray-500">
-                  Prix: ${uosPriceUSD.toFixed(5)} / €{uosPriceEUR.toFixed(5)}
+                  Price: ${uosPriceUSD.toFixed(5)} / €{uosPriceEUR.toFixed(5)}
                 </div>
               </div>
             </div>
