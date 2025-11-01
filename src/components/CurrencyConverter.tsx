@@ -3,14 +3,15 @@ import { useUOSPrice } from '../hooks/useUOSPrice';
 import { useExchangeRate } from '../hooks/useExchangeRate';
 import { convertUSDToEUR, convertEURToUSD } from '../utils/marketCalculations';
 import { LoadingSpinner } from './LoadingSpinner';
-import { AlertCircle, ArrowUpDown, DollarSign, Euro } from 'lucide-react';
+import { AlertCircle, ArrowUpDown, DollarSign, Euro, Coins } from 'lucide-react';
 
 export function CurrencyConverter() {
   const { data: uosData, isLoading: uosLoading, error: uosError } = useUOSPrice();
   const { eurToUsd, isLoading: rateLoading, error: rateError } = useExchangeRate();
   const [usdAmount, setUsdAmount] = useState<string>('');
   const [eurAmount, setEurAmount] = useState<string>('');
-  const lastChangedRef = useRef<'usd' | 'eur' | null>(null);
+  const [uosAmount, setUosAmount] = useState<string>('');
+  const lastChangedRef = useRef<'usd' | 'eur' | 'uos' | null>(null);
 
   const isLoading = uosLoading || rateLoading;
   const error = uosError || rateError;
@@ -24,9 +25,12 @@ export function CurrencyConverter() {
     if (usdAmount && !isNaN(parseFloat(usdAmount)) && uosPriceUSD > 0) {
       const usdValue = parseFloat(usdAmount);
       const eurEquivalent = convertUSDToEUR(usdValue, eurToUsd);
+      const uosEquivalent = usdValue / uosPriceUSD;
       setEurAmount(eurEquivalent.toFixed(2));
+      setUosAmount(uosEquivalent.toFixed(2));
     } else if (usdAmount === '') {
       setEurAmount('');
+      setUosAmount('');
     }
     lastChangedRef.current = null;
   }, [usdAmount, uosPriceUSD, eurToUsd]);
@@ -37,12 +41,31 @@ export function CurrencyConverter() {
     if (eurAmount && !isNaN(parseFloat(eurAmount)) && uosPriceUSD > 0) {
       const eurValue = parseFloat(eurAmount);
       const usdEquivalent = convertEURToUSD(eurValue, eurToUsd);
+      const uosEquivalent = eurValue / uosPriceEUR;
       setUsdAmount(usdEquivalent.toFixed(2));
+      setUosAmount(uosEquivalent.toFixed(2));
     } else if (eurAmount === '') {
       setUsdAmount('');
+      setUosAmount('');
     }
     lastChangedRef.current = null;
-  }, [eurAmount, uosPriceUSD, eurToUsd]);
+  }, [eurAmount, uosPriceUSD, uosPriceEUR, eurToUsd]);
+
+  useEffect(() => {
+    if (lastChangedRef.current !== 'uos') return;
+    
+    if (uosAmount && !isNaN(parseFloat(uosAmount)) && uosPriceUSD > 0) {
+      const uosValue = parseFloat(uosAmount);
+      const usdEquivalent = uosValue * uosPriceUSD;
+      const eurEquivalent = uosValue * uosPriceEUR;
+      setUsdAmount(usdEquivalent.toFixed(2));
+      setEurAmount(eurEquivalent.toFixed(2));
+    } else if (uosAmount === '') {
+      setUsdAmount('');
+      setEurAmount('');
+    }
+    lastChangedRef.current = null;
+  }, [uosAmount, uosPriceUSD, uosPriceEUR]);
 
   const handleUsdChange = (value: string) => {
     if (value === '' || (!isNaN(parseFloat(value)) && parseFloat(value) >= 0)) {
@@ -58,14 +81,11 @@ export function CurrencyConverter() {
     }
   };
 
-  const calculateUOSAmount = (): number => {
-    if (usdAmount && !isNaN(parseFloat(usdAmount)) && uosPriceUSD > 0) {
-      return parseFloat(usdAmount) / uosPriceUSD;
+  const handleUosChange = (value: string) => {
+    if (value === '' || (!isNaN(parseFloat(value)) && parseFloat(value) >= 0)) {
+      lastChangedRef.current = 'uos';
+      setUosAmount(value);
     }
-    if (eurAmount && !isNaN(parseFloat(eurAmount)) && uosPriceEUR > 0) {
-      return parseFloat(eurAmount) / uosPriceEUR;
-    }
-    return 0;
   };
 
   if (error) {
@@ -134,14 +154,24 @@ export function CurrencyConverter() {
               </div>
             </div>
 
-            {(usdAmount || eurAmount) && (
-              <div className="bg-[#8C5AE8]/10 border border-[#8C5AE8]/20 rounded-xl p-4 text-center">
-                <p className="text-gray-400 text-sm mb-1">Quantité UOS équivalente</p>
-                <p className="text-white text-xl font-semibold">
-                  {calculateUOSAmount().toFixed(2)} UOS
-                </p>
+            <div className="bg-[#2A2F3F]/30 rounded-xl p-6">
+              <label className="flex items-center gap-2 text-gray-400 text-sm mb-3">
+                <Coins size={16} />
+                Quantité en UOS
+              </label>
+              <div className="relative">
+                <input
+                  type="text"
+                  value={uosAmount}
+                  onChange={(e) => handleUosChange(e.target.value)}
+                  placeholder="0.00"
+                  className="w-full bg-[#1B1F2B]/50 border border-[#2A2F3F]/50 rounded-lg px-4 py-3 text-white text-2xl font-semibold outline-none focus:outline-none focus:border-[#8C5AE8]/50 focus:ring-2 focus:ring-[#8C5AE8]/20 transition-all"
+                />
+                <div className="mt-2 text-sm text-gray-500">
+                  Prix: ${uosPriceUSD.toFixed(5)} / €{uosPriceEUR.toFixed(5)}
+                </div>
               </div>
-            )}
+            </div>
           </div>
         )}
         
